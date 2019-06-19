@@ -2,6 +2,7 @@
 
 from odoo import models,fields,api
 from odoo.exceptions import ValidationError
+from unidecode import unidecode
 
 class Book(models.Model):
     _name = "managebook.mybook"
@@ -40,4 +41,7 @@ class Book(models.Model):
 
     @api.onchange('author_main')
     def _add_author_in_namebook(self):
-        self.name_book = self.name_book + " = "+ self.author_main.name
+        if self.author_main.name == False:
+            pass
+        else:
+            self.name_book += str(" - ") + str(self.author_main.name)
