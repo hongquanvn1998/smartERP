@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_girl_girl,girl.girl,model_girl_girl,,1,1,1,1

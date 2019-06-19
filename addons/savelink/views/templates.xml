@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="savelink.action_window">
+      <field name="name">Save Link For Education</field>
+      <field name="res_model">savelink.savelink</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+					Add New Link FOR FUTURE EDUCATION
+        </p>
+      </field>      
+    </record>
+    <!--Demo-->
+    <record model="ir.ui.view" id="girl_form_view">
+        <field name="name">savelink list</field>
+        <field name="model">savelink.savelink</field>
+        <field name="arch" type="xml">
+        <form string="Link Form">
+                <sheet>
+                    <field name="id" invisible="True"/>
+                    <field name="images" widget="image" class="oe_avatar"/>
+                    <!-- <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image_medium'}"/> -->
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Tên"/>
+                        <h1><field name="name" placeholder="Mời đặt tên"/></h1>
+                        <div name="options" groups="base.group_user">
+                            <div>
+                             <label class="oe_edit_only" for="name" string="Link"/>
+                                <field name="link"/>
+                            </div>
+                        </div>
+                    </div>
+                    <notebook>
+                          <page string="Thông tin" name="general_information">
+                            <group>
+                                <group name="group_standard_price">
+                                    <field name="types"  string="Format"/>
+                                    <field name="status" string="Status"/>
+                                </group>
+                            </group>
+                            <group string="Mô Tả">
+                                <field name="description" nolabel="1" placeholder="Nhập mô tả"/>
+                            </group>
+                        </page>
+                        <page string="Hình ảnh" name="images">
+                            <group>
+                                <group name="group_general">
+                                    <field name="link" string="link"/>
+                                </group>
+                            </group>
+                            <group string="Ghi chú">
+                                <field name="description" nolabel="1" placeholder="Nhập ghi chú."/>
+                            </group>
+                        </page>
+					</notebook>
+                </sheet>
+        
+        </form>
+      </field>
+    </record>
+    <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="savelink.list">
+            <field name="name">savelink list</field>
+            <field name="model">savelink.savelink</field>
+            <field name="arch" type="xml">
+                <tree string="Link Tree">
+                    <field name="name"/>
+                    <field name="id" />
+                    <field name="link" />
+                    <field name="description"/>
+                    <field name="types"/>
+                    <field name="status" />
+                </tree>
+            </field>
+        </record>
+    <!--Kanban-->
+        <record id="girl_template_kanban_view" model="ir.ui.view">
+            <field name="name">savelink.template.kanban</field>
+            <field name="model">savelink.savelink</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="link"/>
+                    <field name="description"/>
+                    <field name="types"/>
+                    <field name="status"/>
+                    <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('savelink.savelink', 'images', record.id.value)" alt="Product"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <small t-if="record.id.value">[<field name="id"/>]</small>
+                                    </strong>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Tên: <field name="name"></field></li>
+                                    </ul>
+                                    <div name="tags"/>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Link: <field name="link"></field></li>
+                                    </ul>
+                                    <div name="tags"/>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Description: <field name="description"></field></li>
+                                    </ul>
+                                    <div name="tags"/>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Type: <field name="types"></field></li>
+                                    </ul>
+                                    <div name="tags"/>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Trạng thái: <field name="status"></field></li>
+                                    </ul>
+                                    <div name="tags"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <menuitem id="main_savelink_menu" name="Save Link" web_icon="./addons/savelink/static/image/s.jpg" />
+		    <menuitem id="main_link_menu" name="Link" parent="main_savelink_menu" />
+		    <menuitem id="live_menu" name="Link Live" parent="main_savelink_menu" action="savelink.action_window" />
+		    <menuitem id="die_menu" name="Link Die" parent="main_savelink_menu" action="savelink.action_window" />
+    </data>
+</odoo>

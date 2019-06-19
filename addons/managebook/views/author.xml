@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="author_list_action">
+      <field name="name">Danh sách cuốn sách</field>
+      <field name="res_model">managebook.author</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+					Thêm mới tác giả
+        </p>
+      </field>
+    </record>
+    <!-- demo -->
+    <record model="ir.ui.view" id="author_form_view">
+      <field name="name">managebook.author.form</field>
+      <field name="model">managebook.author</field>
+      <field name="arch" type="xml">
+        <form string="Manage Author Form">
+                <sheet>
+                    <field name="id" invisible="True"/>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <!-- <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image_medium'}"/> -->
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Tên"/>
+                        <h1><field name="name" placeholder="Tên tác giả"/></h1>
+                    </div>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="name" string="Ngày sinh"/>
+                        <h1><field name="date_birth"/></h1>
+                    </div>
+                    <field name="mybook"/>
+                </sheet>
+        
+        </form>
+      </field>
+    </record>
+    <!-- demo -->
+    <!-- override the automatically generated list view for courses -->
+    <record model="ir.ui.view" id="book_tree_view">
+      <field name="name">	managebook.author.tree</field>
+      <field name="model">managebook.author</field>
+      <field name="arch" type="xml">
+        <tree string="Author view tree">
+        	<field name="name" />
+        	<field name="date_birth" />
+            <field name="mybook" />
+        </tree>
+      </field>
+    </record>
+    <!--  -->
+    <record id="book_template_kanban_view" model="ir.ui.view">
+        <field name="name">author.template.kanban</field>
+        <field name="model">managebook.author</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name" />
+        	    <field name="date_birth" />
+                <field name="mybook" />
+                <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('managebook.author', 'image', record.id.value)" alt="Product"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <small t-if="record.id.value">[<field name="id"/>]</small>
+                                </strong>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Tên tác giả: <field name="name"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Ngày sinh <field name="date_birth"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Sách đã viết: <field name="mybook"></field></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+	<menuitem id="main_managebook_author_menu" name="Tác giả" />
+  </data>
+</odoo>
