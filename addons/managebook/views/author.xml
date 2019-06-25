@@ -2,7 +2,7 @@
 <odoo>
   <data>
     <record model="ir.actions.act_window" id="author_list_action">
-      <field name="name">Danh sách cuốn sách</field>
+      <field name="name">Danh sách tác giả</field>
       <field name="res_model">managebook.author</field>
       <field name="view_type">form</field>
       <field name="view_mode">kanban,tree,form</field>
@@ -90,6 +90,5 @@
             </kanban>
         </field>
     </record>
-	<menuitem id="main_managebook_author_menu" name="Tác giả" />
   </data>
 </odoo>

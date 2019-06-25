@@ -1,0 +1,14 @@
+li.li_view_kanban {
+    color: blue;
+}
+.oe_kanban_global_click1.o_kanban_record{
+    -webkit-box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75);
+}
+.oe_kanban_global_click1.o_kanban_record:hover {
+    border-radius: 50%;
+    background-color: white;
+    transition-property: background, border-radius;
+    transition-duration: 1s;
+}

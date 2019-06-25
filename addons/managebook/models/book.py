@@ -2,7 +2,6 @@
 
 from odoo import models,fields,api
 from odoo.exceptions import ValidationError
-from unidecode import unidecode
 
 class Book(models.Model):
     _name = "managebook.mybook"
@@ -18,15 +17,20 @@ class Book(models.Model):
     image = fields.Binary("Hình ảnh")
     date_publication = fields.Date("Ngày xuất bản")
     quantum =  fields.Integer(string="Số lượng")
+    cost =  fields.Float(string="Giá gốc")
+    sale_price = fields.Float(string="Giá bán",compute="_cal_price_sale",store=True)
+    status = fields.Selection(string="Trạng thái",
+        selection=[('0',"Sắp hết hàng"),('1',"Còn hàng"),('2',"Hàng sắp về")],store=True)
     publisher = fields.Selection(
         string="Nhà xuất bản",
-        selection=[('0','Kim Đồng'),('1',"Tuổi trẻ"),('2','Thanh niên'),('3','Bộ giáo dục & Đào tạo')]
+        selection=[('0','Kim Đồng'),('1','Tuổi trẻ'),('2','Thanh niên'),('3','Bộ giáo dục & Đào tạo')]
     )
     description = fields.Char(string="Ghi chú")
     number_page = fields.Integer(string="Số trang")
     description = fields.Text("Mô tả",help="viết mô tả ở đây")
     author_main = fields.Many2one(comodel_name="managebook.author",string="Tác giả chính",required=True)
     author_2nd = fields.Many2one(comodel_name="managebook.author",string="Tác giả phụ")
+    # name_book1 = fields.Many2one(string="xxx",comodel_name='hr.employee')
 
 
     _sql_constraints = {('ten_sach_la_duy_nhat','UNIQUE(name_book)',u'Sách bạn tạo đã tồn tại vui lòng thử lại'),('ma_sach_duy_nhat','UNIQUE(seri_num)',u'Mã sách bạn tạo đã đồn tồn tại')}
@@ -45,3 +49,26 @@ class Book(models.Model):
             pass
         else:
             self.name_book += str(" - ") + str(self.author_main.name)
+    @api.multi
+    @api.depends("quantum","cost")
+    def _cal_price_sale(self):
+        for record in self:
+            if record.quantum > 100:
+                record.sale_price = record.cost * 1.2
+            elif record.quantum > 50 and record.quantum <= 100:
+                record.sale_price = record.cost * 1.5
+
+    @api.model
+    def _check_status(self,quantum):
+        self.quantum = quantum
+        if 0 < self.quantum <= 10:
+            self.status = '0'
+        elif self.quantum > 10:
+                self.status = '1'
+        elif self.quantum ==0:
+            self.status = '2'
+        else:
+            pass
+    @api.onchange('quantum')
+    def _change_quantum(self):
+        self._check_status(self.quantum)
