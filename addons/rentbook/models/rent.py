@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+import datetime
 
 class rentbook(models.Model):
     _name = 'rentbook.myrent'
@@ -13,6 +14,9 @@ class rentbook(models.Model):
         comodel_name='rentbook.client',
         required=True
     )
+    begin_rent = fields.Datetime(string="Ngày mượn",required=True)
+    end_rent = fields.Datetime(string="Ngày trả")
+    expired = fields.Boolean(string="Hết hạn",default=False)
     
     
 

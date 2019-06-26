@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data>
-        <menuitem id="main_managebook_menu" name="Quản lý sách" />
-		    <menuitem id="main_book_menu" name="Nhà xuất bản" parent="main_managebook_menu" />
-		    <menuitem id="kd_menu" name="Kim Đồng" parent="main_book_menu" action="book_list_action" />
-    </data>
-</odoo>

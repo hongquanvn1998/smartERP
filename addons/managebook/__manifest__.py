@@ -26,10 +26,11 @@
 
     # always loaded
     'data': [
+        'security/group.xml',
         'security/ir.model.access.csv',
         'views/book.xml',
-        #'views/menu.xml',
         #'views/author.xml',
+        #'views/menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -33,9 +33,11 @@
                     </div>
                     <group>
                         <field name="client" string="Khách hàng thuê"/>
+                        <field name="begin_rent" string="Bắt đầu thuê"/>
+                        <field name="end_rent" string="Hạn trả"/>
+                        <field name="expired" string="Hết hạn"/>
                     </group>
                 </sheet>
-        
         </form>
       </field>
     </record>
@@ -48,17 +50,20 @@
         <tree string="Rent view tree">
         	<field name="id_rent" />
             <field name="name_book" />
-        	<field name="client">
+            <field name="client">
                 <tree editable="bottom">
-                    <field name="id_client" />
-        	        <field name="name_client" />
-                    <field name="id_rent" />
-        	        <field name="num_phone" />
-                    <field name="email_client" />
+                            <field name="id_client" />
+                            <field name="name_client" />
+                            <field name="id_rent" />
+                            <field name="num_phone" />
+                            <field name="email_client" />
+                        </tree>
+                    </field>
                 </tree>
             </field>
-        </tree>
-      </field>
+            <field name="begin_rent"/>
+            <field name="end_rent"/>
+            <field name="expired"/>
     </record>
     <!--  -->
     <record id="rent_template_kanban_view" model="ir.ui.view">
@@ -69,6 +74,9 @@
                 <field name="id_rent" />
                 <field name="name_book" />
         	    <field name="client" />
+                <field name="begin_rent"/>
+                <field name="end_rent"/>
+                <field name="expired"/>
                 <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                 <templates>
                     <t t-name="kanban-box">
@@ -94,6 +102,23 @@
                                 <ul>
                                     <li>Tên khách hàng: <field name="client"></field></li>
                                 </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Ngày bắt đầu: <field name="begin_rent"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Ngày hết hạn: <field name="end_rent"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Quá hạn: <field name="expired"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
                             </div>
                         </div>
                     </t>

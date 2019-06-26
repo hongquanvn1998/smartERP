@@ -17,8 +17,8 @@ class Book(models.Model):
     image = fields.Binary("Hình ảnh")
     date_publication = fields.Date("Ngày xuất bản")
     quantum =  fields.Integer(string="Số lượng")
-    cost =  fields.Float(string="Giá gốc")
-    sale_price = fields.Float(string="Giá bán",compute="_cal_price_sale",store=True)
+    cost =  fields.Integer(string="Giá gốc")
+    sale_price = fields.Integer(string="Giá bán",compute="_cal_price_sale",store=True)
     status = fields.Selection(string="Trạng thái",
         selection=[('0',"Sắp hết hàng"),('1',"Còn hàng"),('2',"Hàng sắp về")],store=True)
     publisher = fields.Selection(
@@ -30,7 +30,6 @@ class Book(models.Model):
     description = fields.Text("Mô tả",help="viết mô tả ở đây")
     author_main = fields.Many2one(comodel_name="managebook.author",string="Tác giả chính",required=True)
     author_2nd = fields.Many2one(comodel_name="managebook.author",string="Tác giả phụ")
-    # name_book1 = fields.Many2one(string="xxx",comodel_name='hr.employee')
 
 
     _sql_constraints = {('ten_sach_la_duy_nhat','UNIQUE(name_book)',u'Sách bạn tạo đã tồn tại vui lòng thử lại'),('ma_sach_duy_nhat','UNIQUE(seri_num)',u'Mã sách bạn tạo đã đồn tồn tại')}
