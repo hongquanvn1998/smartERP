@@ -20,5 +20,11 @@
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
+        <record id="managebook_access_checkbook" model="res.groups">
+            <field name="name">Nhân viên check kho</field>
+            <field name="category_id" ref="managebook_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
     </data>
 </odoo>

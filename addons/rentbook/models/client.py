@@ -23,7 +23,9 @@ class client(models.Model):
     id_rent = fields.One2many(
         string=u'Mã mượn',
         comodel_name='rentbook.myrent',
-        inverse_name='id_rent'
+        inverse_name='id_rent',
+        readonly=True,
+        
     )
     
 

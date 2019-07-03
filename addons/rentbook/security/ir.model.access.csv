@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_rentbook_myrent,rentbook.myrent,model_rentbook_myrent,,1,1,1,1
-access_rentbook_client,rentbook.client,model_rentbook_client,,1,1,1,1
+access_editrent_myrent,access_editrent_myrent,model_rentbook_myrent,rentbook_access_editrent,1,1,1,1
+access_viewrent_myrent,access_viewrent_myrent,model_rentbook_myrent,rentbook_access_viewrent,1,0,1,0
+
+access_editclient_myrent,access_editclient_myrent,model_rentbook_client,rentbook_access_editrent,1,1,1,1
+access_viewclient_myrent,access_viewclient_myrent,model_rentbook_client,rentbook_access_viewrent,1,0,1,0
+

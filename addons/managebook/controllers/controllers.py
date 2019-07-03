@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from odoo import http
 
-# class Managebook(http.Controller):
-#     @http.route('/managebook/managebook/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class Managebook(http.Controller):
+    @http.route('/managebook/sale/', auth='public')
+    def index(self, **kw):
+        books = http.request.env['managebook.mybook'].search([])
+
+        return http.request.render('managebook.mainpage',{'books':books})
 
 #     @http.route('/managebook/managebook/objects/', auth='public')
 #     def list(self, **kw):

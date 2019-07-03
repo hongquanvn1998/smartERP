@@ -30,6 +30,11 @@ class Book(models.Model):
     description = fields.Text("Mô tả",help="viết mô tả ở đây")
     author_main = fields.Many2one(comodel_name="managebook.author",string="Tác giả chính",required=True)
     author_2nd = fields.Many2one(comodel_name="managebook.author",string="Tác giả phụ")
+    check_store = fields.One2many(
+        comodel_name='managebook.checkstore',
+        inverse_name='name_book',
+    )
+    
 
 
     _sql_constraints = {('ten_sach_la_duy_nhat','UNIQUE(name_book)',u'Sách bạn tạo đã tồn tại vui lòng thử lại'),('ma_sach_duy_nhat','UNIQUE(seri_num)',u'Mã sách bạn tạo đã đồn tồn tại')}
@@ -56,6 +61,10 @@ class Book(models.Model):
                 record.sale_price = record.cost * 1.2
             elif record.quantum > 50 and record.quantum <= 100:
                 record.sale_price = record.cost * 1.5
+            elif record.quantum < 50:
+                record.sale_price = record.cost * 2
+            else:
+                pass
 
     @api.model
     def _check_status(self,quantum):

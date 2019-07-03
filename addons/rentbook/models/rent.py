@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-import datetime
+from datetime import date,time,datetime,timedelta
+from dateutil.relativedelta import relativedelta
+
 
 class rentbook(models.Model):
     _name = 'rentbook.myrent'
@@ -14,10 +16,26 @@ class rentbook(models.Model):
         comodel_name='rentbook.client',
         required=True
     )
-    begin_rent = fields.Datetime(string="Ngày mượn",required=True)
-    end_rent = fields.Datetime(string="Ngày trả")
+    begin_rent = fields.Date(string="Ngày mượn")
+    end_rent = fields.Date(string="Ngày trả",
+    compute='_compute_end'
+    )
     expired = fields.Boolean(string="Hết hạn",default=False)
     
+    @api.multi
+    @api.depends('begin_rent')
+    def _compute_end(self):
+        for record in self:
+            record.begin_rent = date.today()
+            record.end_rent = record.begin_rent + relativedelta(days=1)
+
+    @api.onchange('end_rent')
+    def _check_expired(self):
+        self.date_now = date.today()
+        if self.end_rent < self.date_now:
+            self.expired = True
+        else:
+            self.expired = False
     
 
     

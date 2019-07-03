@@ -1,0 +1,23 @@
+<odoo>
+  <data>
+<template id="mainpage">
+<div  >
+   
+    <t t-foreach="books" t-as="book">
+    <div >
+        <t t-esc="book.name_book"/> <br/>
+         <t t-esc="book.quantum"/> <br/>
+          <t t-esc="book.sale_price"/> <br/>
+           <t t-esc="book.cost"/> <br/>
+    </div>
+        
+    </t>
+
+    <t t-esc="http.request.env['managebook.mybook'].search([('id','=',1)])" />
+    
+</div>
+ </template>
+
+ </data>
+</odoo>
+ 

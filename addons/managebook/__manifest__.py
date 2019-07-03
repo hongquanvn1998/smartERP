@@ -3,7 +3,7 @@
     'name': "Quản lý sách",
 
     'summary': """
-        Ứng dụng quản lý sách
+        Ứng dụng quản lý sách.
         Một addon nhỏ trên odoo""",
 
     'description': """
@@ -21,7 +21,7 @@
 
     # any module necessary for this one to work correctly
     'depends': [
-        'base','hr'
+        'base',
     ],
 
     # always loaded
@@ -29,8 +29,9 @@
         'security/group.xml',
         'security/ir.model.access.csv',
         'views/book.xml',
-        #'views/author.xml',
-        #'views/menu.xml',
+        'security/rule_group.xml',
+        'views/mainpage.xml',
+        # 'views/check.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

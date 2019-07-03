@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data >
+        
+        <record id="employee_view" model="ir.rule">
+            <field name="name">Kiểm tra sắp hết hàng</field>
+            <field name="model_id" ref="model_managebook_mybook"/>
+            <field name="domain_force">['|',('status','=',0),('status','=',2)]</field>
+            <!-- <field name="global" eval="True" /> -->
+            <field name="perm_read" eval="1" />
+            <field name="perm_create" eval="0" />
+            <field name="perm_write" eval="0" />
+            <field name="perm_unlink" eval="0" />
+            <field name="groups" eval="[(4,ref('managebook_access_checkbook'))]" />
+        </record>
+
+    </data>
+</odoo>

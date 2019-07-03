@@ -35,6 +35,7 @@
                         <field name="client" string="Khách hàng thuê"/>
                         <field name="begin_rent" string="Bắt đầu thuê"/>
                         <field name="end_rent" string="Hạn trả"/>
+                        <field name="create_uid" string="Được tạo bởi" groups="rentbook.rentbook_access_editrent"/>
                         <field name="expired" string="Hết hạn"/>
                     </group>
                 </sheet>
@@ -50,20 +51,13 @@
         <tree string="Rent view tree">
         	<field name="id_rent" />
             <field name="name_book" />
-            <field name="client">
-                <tree editable="bottom">
-                            <field name="id_client" />
-                            <field name="name_client" />
-                            <field name="id_rent" />
-                            <field name="num_phone" />
-                            <field name="email_client" />
-                        </tree>
-                    </field>
-                </tree>
-            </field>
+            <field name="client"/>
             <field name="begin_rent"/>
             <field name="end_rent"/>
+            <field name="create_uid" groups="rentbook.rentbook_access_editrent"/>
             <field name="expired"/>
+        </tree>
+       </field>
     </record>
     <!--  -->
     <record id="rent_template_kanban_view" model="ir.ui.view">
@@ -76,6 +70,7 @@
         	    <field name="client" />
                 <field name="begin_rent"/>
                 <field name="end_rent"/>
+                <field name="create_uid" groups="rentbook.rentbook_access_editrent"/>
                 <field name="expired"/>
                 <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                 <templates>
@@ -118,6 +113,10 @@
                                     <li>Quá hạn: <field name="expired"></field></li>
                                 </ul>
                                 <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Được tạo bởi: <field name="create_uid" groups="rentbook.rentbook_access_editrent"></field></li>
+                                </ul>
                                 <div name="tags"/>
                             </div>
                         </div>

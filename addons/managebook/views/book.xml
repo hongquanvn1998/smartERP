@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <data>
-    <!-- Add file css for odoo -->
+    <!-- Add file CSS and JS for odoo -->
     <template id="my_bookcss_id" name="website assets for my module" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-        <link rel="stylesheet" href="/managebook/static/src/css/book.css"/>
+            <link rel="stylesheet" href="/managebook/static/src/css/book.css"/>
+            <script type="text/javascript" src="/managebook/static/src/js/scripts.js" />
         </xpath>
     </template>
     <!--  -->

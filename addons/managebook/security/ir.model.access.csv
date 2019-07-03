@@ -1,6 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_editbook1,access_editbook1,model_managebook_mybook,,1,1,1,1
+
 access_editbook,access_editbook,model_managebook_mybook,managebook_access_editbook,1,1,1,1
 access_viewbook,access_viewbook,model_managebook_mybook,managebook_access_viewbook,1,0,0,0
+access_checkbook,access_checkbook,model_managebook_mybook,managebook_access_checkbook,1,0,0,0
 
 access_editauthor,access_editauthor,model_managebook_author,managebook_access_editbook,1,1,1,1
 access_viewauthor,access_viewthor,model_managebook_author,managebook_access_viewbook,1,0,0,0
+
+access_checkstore,access_checkstore,model_managebook_checkstore,managebook_access_checkbook,1,0,0,0
+
+access_editauthor,access_editauthor,model_managebook_mybook,managebook_access_editbook,1,1,1,1
