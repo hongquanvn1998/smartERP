@@ -30,10 +30,6 @@ class Book(models.Model):
     description = fields.Text("Mô tả",help="viết mô tả ở đây")
     author_main = fields.Many2one(comodel_name="managebook.author",string="Tác giả chính",required=True)
     author_2nd = fields.Many2one(comodel_name="managebook.author",string="Tác giả phụ")
-    check_store = fields.One2many(
-        comodel_name='managebook.checkstore',
-        inverse_name='name_book',
-    )
     
 
 
