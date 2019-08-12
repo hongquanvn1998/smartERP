@@ -18,6 +18,10 @@ class Book(models.Model):
     image = fields.Binary("Hình ảnh")
     date_publication = fields.Date("Ngày xuất bản")
     quantum =  fields.Integer(string="Số lượng")
+    price_origin = fields.Float(string="Giá gốc")
+    sale_price = fields.Float(string="Giá bán ",compute="_cal_sale_price")
+    status = fields.Selection(string="Trạng thái",
+        selection=[('0','Còn hàng'),('1','Sắp hết hàng'),('2','Sắp có hàng')])
     publisher = fields.Selection(
         string="Nhà xuất bản",
         selection=[('0','Kim Đồng'),('1',"Tuổi trẻ"),('2','Thanh niên'),('3','Bộ giáo dục & Đào tạo')]
@@ -27,7 +31,6 @@ class Book(models.Model):
     description = fields.Text("Mô tả",help="viết mô tả ở đây")
     author_main = fields.Many2one(comodel_name="managebook.author",string="Tác giả chính",required=True)
     author_2nd = fields.Many2one(comodel_name="managebook.author",string="Tác giả phụ")
-
 
     _sql_constraints = {('ten_sach_la_duy_nhat','UNIQUE(name_book)',u'Sách bạn tạo đã tồn tại vui lòng thử lại'),('ma_sach_duy_nhat','UNIQUE(seri_num)',u'Mã sách bạn tạo đã đồn tồn tại')}
     _depends = {} #truy xuất dữ liệu đến các bảng để lấy fields,model
@@ -45,3 +48,6 @@ class Book(models.Model):
             pass
         else:
             self.name_book += str(" - ") + str(self.author_main.name)
+
+    @api.multi
+    @api.depends
