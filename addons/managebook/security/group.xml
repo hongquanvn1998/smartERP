@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="managebook_group" model="ir.module.category">
+            <field name="name">Phân quyền trong thư viện</field>
+            <field name="sequence" eval="1" />
+        </record>
+        
+        <record id="managebook_access_editbook" model="res.groups">
+            <field name="name">Quản lý thư viện</field>
+            <field name="category_id" ref="managebook_group" />
+            <field name="implied_ids" eval="[{4,ref('base.group_user')}]" />
+        </record>
+
+        
+        <record id="managebook_access_viewbook" model="res.groups">
+            <field name="name">Nhân viên thư viện</field>
+            <field name="category_id" ref="managebook_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="managebook_access_checkbook" model="res.groups">
+            <field name="name">Nhân viên check kho</field>
+            <field name="category_id" ref="managebook_group"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

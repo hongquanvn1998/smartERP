@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <data>
+    <!-- Add file CSS and JS for odoo -->
+    <template id="my_bookcss_id" name="website assets for my module" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/managebook/static/src/css/book.css"/>
+            <script type="text/javascript" src="/managebook/static/src/js/scripts.js" />
+        </xpath>
+    </template>
+    <!--  -->
     <record model="ir.actions.act_window" id="book_list_action">
       <field name="name">Danh sách cuốn sách</field>
       <field name="res_model">managebook.mybook</field>
@@ -28,6 +36,9 @@
 
                         <label class="oe_edit_only" for="name_book" string="Mã sách"/>
                         <field name="seri_num" placeholder="Mã sách"/>
+                        <group>
+                                <field name="status" string="Trạng thái"/>
+                        </group>
                     </div>
                     <notebook>
                         <page string="Tác giả" name="author_information">
@@ -57,9 +68,12 @@
                                 <group name="group_general">
                                     <field name="number_page" string="Số trang"/>
                                 </group>
-                            </group>
-                            <group string="Ghi chú">
-                                <field name="description" nolabel="1" placeholder="Nhập ghi chú."/>
+                                <group name="group_general">
+                                    <field name="cost" string="Giá gốc(vnđ)"></field>
+                                </group>
+                                <group name="group_general">
+                                    <field name="sale_price" string="Giá bán(vnđ)"></field>
+                                </group>
                             </group>
                         </page>
 					</notebook>
@@ -82,7 +96,9 @@
 					<field name="date_publication" />
 					<field name="number_page" />
 					<field name="quantum" />
+                    <field name="sale_price" />
 					<field name="publisher" />
+                    <field name="status" />
         </tree>
       </field>
     </record>
@@ -99,7 +115,9 @@
                 <field name="date_publication" />
 				<field name="number_page" />
 				<field name="quantum" />
+                <field name="sale_price" />
 				<field name="publisher" />
+                <field name="status" />
                 <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                 <templates>
                     <t t-name="kanban-box">
@@ -113,38 +131,48 @@
                                 </strong>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>Tên sách: <field name="name_book"></field></li>
+                                    <li class="li_view_kanban">Tên sách: <field name="name_book"></field></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>Mã sách: <field name="seri_num" /></li>
+                                    <li class="li_view_kanban">Mã sách: <field name="seri_num" /></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/> 
                                 <ul>
-                                    <li>Tác giả: <field name="author_main"></field></li>
+                                    <li class="li_view_kanban">Tác giả: <field name="author_main"></field></li>
                                     <li><field name="author_2nd"></field></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>Ngày xuất bản: <field name="date_publication"></field></li>
+                                    <li class="li_view_kanban">Ngày xuất bản: <field name="date_publication"></field></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>Số trang: <field name="number_page"></field></li>
+                                    <li class="li_view_kanban">Số trang: <field name="number_page"></field></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>Số lượng: <field name="quantum"></field></li>
+                                    <li class="li_view_kanban">Số lượng: <field name="quantum"></field></li>
                                 </ul>
                                 <div name="tags"/>
                                 <div name="tags"/>
                                 <ul>
-                                    <li>NXB: <field name="publisher"></field></li>
+                                    <li class="li_view_kanban">Giá bán: <field name="sale_price"></field> VNĐ</li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li class="li_view_kanban">NXB: <field name="publisher"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <ul>
+                                    <li class="li_view_kanban">Trạng thái: <field name="status"></field></li>
                                 </ul>
                             </div>
                         </div>
@@ -153,8 +181,8 @@
             </kanban>
         </field>
     </record>
-	<menuitem id="main_managebook_menu" name="Quản lý sách" />
-		<menuitem id="main_book_menu" name="Nhà xuất bản" parent="main_managebook_menu" />
-		<menuitem id="kd_menu" name="Kim Đồng" parent="main_book_menu" action="book_list_action" />
+    <menuitem id="main_managebook_menu" name="Quản lý sách" />
+		    <menuitem id="main_book_menu" name="Nhà xuất bản" parent="main_managebook_menu" />
+		    <menuitem id="kd_menu" name="Kim Đồng" parent="main_book_menu" action="book_list_action" />
   </data>
 </odoo>

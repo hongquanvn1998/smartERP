@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- Add file css for odoo -->
+
+    <!--  -->
+    <record model="ir.actions.act_window" id="checkstore_list_action">
+      <field name="name">Kiểm tra kho sách</field>
+      <field name="res_model">managebook.checkstore</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+					Kiểm tra sách trong kho
+        </p>
+      </field>
+    </record>
+    <!-- demo -->
+    <!-- demo -->
+    <!-- override the automatically generated list view for courses -->
+    <record model="ir.ui.view" id="checkstore_tree_view">
+      <field name="name">	managebook.checkstore.tree</field>
+      <field name="model">managebook.checkstore</field>
+      <field name="arch" type="xml">
+        <tree string="Check view tree">
+        	<field name="name_book" />
+            <!-- <field name="status" /> -->
+        </tree>
+      </field>
+    </record>
+    <!--  -->
+    <record id="checkstore_template_kanban_view" model="ir.ui.view">
+        <field name="name">checkstore.template.kanban</field>
+        <field name="model">managebook.checkstore</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name_book" />
+                <!-- <field name="status" /> -->
+                <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <!-- <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('managebook.mybook', 'image', record.id.value)" alt="Product"/>
+                            </div> -->
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li class="li_view_kanban">Tên sách: <field name="name_book"></field></li>
+                                </ul>
+                                <div name="tags"/>
+                                <div name="tags"/>
+                                <!-- <ul>
+                                    <li class="li_view_kanban">Trạng thái: <field name="status"></field></li>
+                                </ul> -->
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <menuitem id="main_checkstore_menu" name="Kiểm tra kho" />
+		    <menuitem id="main_check_menu" name="Kiểm tra kho sách" parent="main_checkstore_menu" />
+		    <menuitem id="check1_menu" name="Kiểm tra" parent="main_check_menu" action="checkstore_list_action" />
+  </data>
+</odoo>
